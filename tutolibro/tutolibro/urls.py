@@ -21,6 +21,8 @@ from application import views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("", views.mi_vista, name="mi_vista"),
+    path("", views.home, name="home"),
+    path("about/", views.about, name="about"),
+    path("contact/", views.contact, name="contact"),
     path("admin/", admin.site.urls),
 ]
