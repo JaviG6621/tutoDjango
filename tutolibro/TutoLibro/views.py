@@ -2,6 +2,7 @@ from django.shortcuts import render, HttpResponse
 from django.http import HttpResponse
 from django.view.generic import TemplateView, DetailView, ListView
 from .models import Usuario
+import datetime
 
 class IndexView(TemplateView):
     template_name = 'index.html'
@@ -37,5 +38,10 @@ def about(request):
 
 def contact(request):
     return render(request, "application/contact.html")
+
+def current_datetime(request):
+    now = datetime.datetime.now()
+    html = "<html><body>La hora es %s</body></html>" %now
+    return HttpResponse(html)
 
 # Create your views here.
