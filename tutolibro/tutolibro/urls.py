@@ -21,7 +21,8 @@ from TutoLibro import views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("", views.indexView.as_view(), name="index"),
+    path("", views.IndexView.as_view(), name="index"),
+    path("hora/", views.current_datetime, name="hora"),
     #path("", views.home, name="home"),
     path("about/", views.about, name="about"),
     path("contact/", views.contact, name="contact"),
