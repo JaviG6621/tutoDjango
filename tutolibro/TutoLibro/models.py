@@ -1,6 +1,41 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, BaseUserManager
 import uuid
+
+# 1. Creamos el gestor personalizado para el email
+class CustomUserManager(BaseUserManager):
+    def create_user(self, email, password=None, **extra_fields):
+        if not email:
+            raise ValueError('El campo Email es obligatorio')
+        email = self.normalize_email(email)
+        user = self.model(email=email, **extra_fields)
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
+
+    def create_superuser(self, email, password=None, **extra_fields):
+        extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('is_superuser', True)
+        extra_fields.setdefault('is_active', True)
+
+        if extra_fields.get('is_staff') is not True:
+            raise ValueError('El superusuario debe tener is_staff=True.')
+        if extra_fields.get('is_superuser') is not True:
+            raise ValueError('El superusuario debe tener is_superuser=True.')
+
+        return self.create_user(email, password, **extra_fields)
+
+
+# 2. Tu modelo User actualizado usando el gestor anterior
+class User(AbstractUser):
+    username = models.CharField(max_length=150, blank=True, null=True)
+    email = models.EmailField('email address', unique=True)
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []  # Sin username ni password aquí
+
+    # ¡ESTA LÍNEA ES LA CLAVE QUE FALTABA!
+    objects = CustomUserManager()
 
 class Project(models.Model):
     title = models.CharField(max_length=30)
@@ -23,9 +58,3 @@ class Persona(models.Model):
         return f"{self.nombre} {self.apellidos}"
 
 
-class User(AbstractUser):
-    username = models.CharField(max_length=150, blank=True, null=True)
-    email = models.EmailField('email address', unique=True)
-
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = []
