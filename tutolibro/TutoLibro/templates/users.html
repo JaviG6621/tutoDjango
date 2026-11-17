@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+{% for user in users %}
+    <div class="single-user">
+        <span class="name">{{user.name}}</span>
+        </span class="email">{{user.email}}</span> 
+    </div>
+{%end for%}
+{%end block%}
