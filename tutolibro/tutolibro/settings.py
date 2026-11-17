@@ -126,3 +126,5 @@ MAILERS = {
         "BACKEND": "django.core.mail.backends.console.EmailBackend",
     },
 }
+
+AUTH_USER_MODEL = 'TutoLibro.User'  # Cambia 'nombre_de_tu_app' por el nombre real de tu aplicación
