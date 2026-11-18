@@ -80,12 +80,19 @@ WSGI_APPLICATION = "tutolibro.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/6.1/ref/settings/#databases
 
+# Configuración antigua de SQLite (comentada)
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": BASE_DIR / "db.sqlite3",
+#     }
+# }
+
+# Configuración moderna con django-environ
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
+    'default': env.db('DATABASE_URL')
 }
+
 
 
 # Password validation
