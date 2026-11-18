@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "TutoLibro"
+    "TutoLibro",
+    "rest_framework"
 ]
 
 MIDDLEWARE = [
