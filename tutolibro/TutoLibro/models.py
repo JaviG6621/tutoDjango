@@ -2,6 +2,13 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 import uuid
 
+languages = (
+	('python', 'PYTHON'),
+	('c', 'C'),
+	('java', 'JAVA'),
+	('php', 'PHP')
+)
+
 # 1. Creamos el gestor personalizado para el email
 class CustomUserManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
@@ -65,3 +72,10 @@ class Perfil(models.Model):
     date_modified = models.DateTimeField(auto_now = True)
     def __str__(self):
         return self.user.username
+
+class Developer(models.Model):
+	nick = models.CharField(max_length = 16)
+	first_name = models.CharField(max_length = 255)
+	last_name = models.CharField(max_length = 255)
+	email = models.EmailField()
+	programming_language = models.CharField(max_length = 32, choices = languages)
