@@ -1,7 +1,14 @@
 from django.contrib import admin
-from .models import Project, Persona, User
+from django.contrib.auth import get_user_model
+from django.contrib.auth.admin import UserAdmin
+from .models import Project, Persona
 
-# Registramos tus modelos para que aparezcan en la web de administración
+# Registramos Project y Persona de forma estándar
 admin.site.register(Project)
 admin.site.register(Persona)
-admin.site.register(User)  # Si también quieres ver tu modelo de usuario personalizado
+
+# Registramos nuestro modelo de usuario personalizado usando el UserAdmin del libro
+@admin.register(get_user_model())
+class CustomUserAdmin(UserAdmin):
+    # Aquí puedes personalizar cómo se ve el usuario en el admin más adelante si el libro te lo pide
+    pass
