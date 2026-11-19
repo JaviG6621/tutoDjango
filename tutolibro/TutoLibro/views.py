@@ -38,7 +38,7 @@ class DeveloperList(generics.ListCreateAPIView):
     serializer_class = DeveloperSerializer
     queryset = Developer.objects.all()
 
-class DeveloperDetail(generics.UpdateDestroyAPIView):
+class DeveloperDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = DeveloperSerializer
     def retrieve(self, request, *args, **kwargs):
         pk = self.kwargs.get('pk')
