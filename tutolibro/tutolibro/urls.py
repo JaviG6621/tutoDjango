@@ -16,7 +16,7 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from TutoLibro import views 
 
 urlpatterns = [
@@ -28,4 +28,5 @@ urlpatterns = [
     path("contact/", views.contact, name="contact"),
     path("admin/", admin.site.urls),
     path("get_datetime/", views.current_datetime),
+    path("api/", include("TutoLibro.urls")),
 ]
