@@ -34,11 +34,11 @@ def current_datetime(request):
     html = f"<html><body>La hora es {now}</body></html>"
     return HttpResponse(html)
 
-class DeveloperList(generics.ListCreateApiView):
+class DeveloperList(generics.ListCreateAPIView):
     serializer_class = DeveloperSerializer
     queryset = Developer.objects.all()
 
-class DeveloperDetail(generics.UpdateDestroyApiView):
+class DeveloperDetail(generics.UpdateDestroyAPIView):
     serializer_class = DeveloperSerializer
     def retrieve(self, request, *args, **kwargs):
         pk = self.kwargs.get('pk')
